@@ -30,6 +30,7 @@
     font-family:var(--body);
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
+    position:relative;
   }
   a{color:inherit;}
   img{max-width:100%; display:block;}
@@ -40,6 +41,65 @@
     outline:2px solid var(--rec);
     outline-offset:3px;
   }
+
+  /* ---------- FILM GRAIN / VIGNETTE ---------- */
+  .grain{
+    position:fixed;
+    inset:-10%;
+    width:120%;
+    height:120%;
+    pointer-events:none;
+    z-index:9999;
+    opacity:0.045;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain-shift 8s steps(8) infinite;
+  }
+  @keyframes grain-shift{
+    0%{transform:translate(0,0);}
+    10%{transform:translate(-2%,-3%);}
+    20%{transform:translate(-4%,2%);}
+    30%{transform:translate(2%,-4%);}
+    40%{transform:translate(-2%,4%);}
+    50%{transform:translate(4%,1%);}
+    60%{transform:translate(-3%,-2%);}
+    70%{transform:translate(3%,3%);}
+    80%{transform:translate(-1%,-3%);}
+    90%{transform:translate(1%,2%);}
+    100%{transform:translate(0,0);}
+  }
+  .vignette{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9998;
+    background:radial-gradient(ellipse at center, rgba(20,23,28,0) 55%, rgba(20,23,28,0.16) 100%);
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .shot.reveal:nth-of-type(1){transition-delay:0s;}
+  .shot.reveal:nth-of-type(2){transition-delay:0.06s;}
+  .shot.reveal:nth-of-type(3){transition-delay:0.12s;}
+  .shot.reveal:nth-of-type(4){transition-delay:0.18s;}
+  .frame.reveal:nth-of-type(1){transition-delay:0s;}
+  .frame.reveal:nth-of-type(2){transition-delay:0.05s;}
+  .frame.reveal:nth-of-type(3){transition-delay:0.1s;}
+  .frame.reveal:nth-of-type(4){transition-delay:0.15s;}
+  .frame.reveal:nth-of-type(5){transition-delay:0.2s;}
+  .frame.reveal:nth-of-type(6){transition-delay:0.25s;}
+  .callsheet-row.reveal:nth-of-type(1){transition-delay:0s;}
+  .callsheet-row.reveal:nth-of-type(2){transition-delay:0.06s;}
+  .callsheet-row.reveal:nth-of-type(3){transition-delay:0.12s;}
+  .callsheet-row.reveal:nth-of-type(4){transition-delay:0.18s;}
 
   .wrap{
     max-width:1180px;
@@ -79,11 +139,17 @@
   .dot{
     width:8px; height:8px; border-radius:50%;
     background:var(--rec);
-    animation:blink 2.4s ease-in-out infinite;
+    box-shadow:0 0 0 0 rgba(193,68,60,0.6);
+    animation:blink 1.8s ease-in-out infinite, pulse-ring 1.8s ease-in-out infinite;
   }
   @keyframes blink{
     0%,100%{opacity:1;}
-    50%{opacity:0.25;}
+    50%{opacity:0.3;}
+  }
+  @keyframes pulse-ring{
+    0%{box-shadow:0 0 0 0 rgba(193,68,60,0.5);}
+    70%{box-shadow:0 0 0 6px rgba(193,68,60,0);}
+    100%{box-shadow:0 0 0 0 rgba(193,68,60,0);}
   }
   nav.links{
     display:flex;
@@ -169,6 +235,13 @@
   }
   .rec-line .tc{
     color:var(--ink-soft);
+  }
+  .rec-dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--rec);
+    display:inline-block;
+    box-shadow:0 0 0 0 rgba(193,68,60,0.6);
+    animation:blink 1.8s ease-in-out infinite, pulse-ring 1.8s ease-in-out infinite;
   }
   h1.hero-title{
     font-family:var(--display);
@@ -523,12 +596,20 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .dot{animation:none;}
+    .dot, .rec-dot{animation:none;}
+    .grain{animation:none;}
     html{scroll-behavior:auto;}
+    .reveal{
+      opacity:1 !important;
+      transform:none !important;
+      transition:none !important;
+    }
   }
 </style>
 </head>
 <body>
+<div class="grain"></div>
+<div class="vignette"></div>
 
 <header class="site-nav">
   <div class="nav-inner">
@@ -539,7 +620,7 @@
       <a href="#rates">Rates</a>
       <a href="#about">About</a>
     </nav>
-    <a class="nav-cta" href="#contact">Start a project</a>
+    <a class="nav-cta" href="https://calendly.com/ryanlopezclark" target="_blank" rel="noopener">Start a project</a>
   </div>
 </header>
 
@@ -548,7 +629,7 @@
     <div class="viewfinder">
       <div class="corner-tl"></div>
       <div class="corner-br"></div>
-      <div class="rec-line">● REC <span class="tc">LOS ANGELES / HOUSTON, AVAILABLE FOR BOOKING</span></div>
+      <div class="rec-line"><span class="rec-dot"></span> REC <span class="tc">LOS ANGELES / HTX, AVAILABLE FOR BOOKING</span></div>
       <h1 class="hero-title">Camera work<br>that keeps up<br>with your <em>brand.</em></h1>
       <p class="hero-sub">I'm Ryan Lopez Clark, a camera operator, creative director, and photographer building fast, polished visual content for brands and creators. On-set, on-location, or live.</p>
       <div class="hero-actions">
@@ -567,24 +648,24 @@
 <section id="services">
   <div class="wrap">
     <div class="eyebrow">Services</div>
-    <h2 class="section-title">Every shoot, handled front to back: camera, direction, and the finished edit.</h2>
+    <h2 class="section-title reveal">Every shoot, handled front to back: camera, direction, and the finished edit.</h2>
     <div class="shotlist">
-      <div class="shot">
+      <div class="shot reveal">
         <div class="shot-num">01</div>
         <div class="shot-name">Camera Operation</div>
         <div class="shot-desc">Multi-cam and single-op coverage for brand shoots, interviews, live events, and IRL content that's steady, reactive, and easy to direct on the fly.</div>
       </div>
-      <div class="shot">
+      <div class="shot reveal">
         <div class="shot-num">02</div>
         <div class="shot-name">Creative Direction</div>
         <div class="shot-desc">Concepting, shot lists, and on-set direction that keep a production moving and make sure the final cut actually serves the brand.</div>
       </div>
-      <div class="shot">
+      <div class="shot reveal">
         <div class="shot-num">03</div>
         <div class="shot-name">Photography</div>
         <div class="shot-desc">Product, portrait, and event photography for brands and creators who need images that hold up across every platform.</div>
       </div>
-      <div class="shot">
+      <div class="shot reveal">
         <div class="shot-num">04</div>
         <div class="shot-name">Social Content Production</div>
         <div class="shot-desc">Short-form and platform-native content built to be clipped, posted, and repurposed, shot with the algorithm in mind, not just the frame.</div>
@@ -596,45 +677,44 @@
 <section id="work">
   <div class="wrap">
     <div class="eyebrow">Selected Work</div>
-    <h2 class="section-title">A few frames from recent projects.</h2>
+    <h2 class="section-title reveal">A few frames from recent projects.</h2>
     <div class="work-grid">
-      <a class="frame" href="work/brand-shoot.html"><img src="images/work/brand-shoot-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">01</span><span class="tag">Brand shoot</span></a>
-      <a class="frame" href="work/live-event.html"><img src="images/work/live-event-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">02</span><span class="tag">Live event</span></a>
-      <a class="frame" href="work/creator-content.html"><img src="images/work/creator-content-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">03</span><span class="tag">Creator content</span></a>
-      <a class="frame" href="work/portrait-series.html"><img src="images/work/portrait-series-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">04</span><span class="tag">Portrait series</span></a>
-      <a class="frame" href="work/product-photography.html"><img src="images/work/product-photography-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">05</span><span class="tag">Product photography</span></a>
-      <a class="frame" href="work/irl-stream.html"><img src="images/work/irl-stream-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">06</span><span class="tag">IRL stream</span></a>
+      <a class="frame reveal" href="work/brand-shoot.html"><img src="images/work/brand-shoot-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">01</span><span class="tag">Brand shoot</span></a>
+      <a class="frame reveal" href="work/live-event.html"><img src="images/work/live-event-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">02</span><span class="tag">Live event</span></a>
+      <a class="frame reveal" href="work/creator-content.html"><img src="images/work/creator-content-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">03</span><span class="tag">Creator content</span></a>
+      <a class="frame reveal" href="work/portrait-series.html"><img src="images/work/portrait-series-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">04</span><span class="tag">Portrait series</span></a>
+      <a class="frame reveal" href="work/product-photography.html"><img src="images/work/product-photography-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">05</span><span class="tag">Product photography</span></a>
+      <a class="frame reveal" href="work/irl-stream.html"><img src="images/work/irl-stream-cover.jpg" alt="" onerror="this.remove();"><span class="fnum">06</span><span class="tag">IRL stream</span></a>
     </div>
-    <p class="work-note">Placeholder frames. Click any tile to see its project page, then add real photos and details there.</p>
   </div>
 </section>
 
 <section id="rates">
   <div class="wrap">
     <div class="eyebrow">Rate Card</div>
-    <h2 class="section-title">Simple packages. Custom quotes for anything bigger.</h2>
+    <h2 class="section-title reveal">Simple packages. Custom quotes for anything bigger.</h2>
     <div class="callsheet">
       <div class="callsheet-head">
         <div>Package</div>
         <div>What's included</div>
         <div style="text-align:right;">Rate</div>
       </div>
-      <div class="callsheet-row">
+      <div class="callsheet-row reveal">
         <div class="cs-package">Half Day</div>
         <div class="cs-detail">Up to 4 hrs on-site, single camera operation</div>
         <div class="cs-rate">$800</div>
       </div>
-      <div class="callsheet-row">
+      <div class="callsheet-row reveal">
         <div class="cs-package">Full Day</div>
         <div class="cs-detail">Up to 8 hrs on-site, camera + creative direction</div>
         <div class="cs-rate">$1,400</div>
       </div>
-      <div class="callsheet-row">
+      <div class="callsheet-row reveal">
         <div class="cs-package">Photography Session</div>
         <div class="cs-detail">Product, portrait, or event stills, edited gallery delivered</div>
         <div class="cs-rate">$400</div>
       </div>
-      <div class="callsheet-row">
+      <div class="callsheet-row reveal">
         <div class="cs-package">Content Package</div>
         <div class="cs-detail">Multi-day or retainer-based social content production</div>
         <div class="cs-rate">$2,500+</div>
@@ -647,27 +727,27 @@
 <section id="about">
   <div class="wrap">
     <div class="eyebrow">About</div>
-    <h2 class="section-title">Behind the camera and ahead of the shot list.</h2>
+    <h2 class="section-title reveal">Behind the camera and ahead of the shot list.</h2>
     <div class="about-grid">
-      <div class="portrait-frame">
+      <div class="portrait-frame reveal">
         <img src="images/about/portrait.jpg" alt="Portrait of Ryan Lopez Clark" onerror="this.style.display='none'; this.parentElement.classList.add('portrait-empty');">
         <span class="portrait-placeholder">Add<br>portrait.jpg</span>
       </div>
-      <div class="about-body">
+      <div class="about-body reveal">
         <p>I split my time between LA and Houston, working with brands and creators who need someone who can run a camera, direct a scene, and think about the edit before it's even shot.</p>
         <p>Most of my work sits at the intersection of production and platform, and I understand what a piece of content needs to do once it's live, not just how it should look on set.</p>
         <p>Whether it's a single half-day shoot or an ongoing content partnership, I keep things efficient, communicative, and easy to work with.</p>
       </div>
       <div class="stat-list">
-        <div class="stat">
-          <div class="stat-num">LA / HOU</div>
+        <div class="stat reveal">
+          <div class="stat-num">LA / HTX</div>
           <div class="stat-label">Based &amp; available</div>
         </div>
-        <div class="stat">
+        <div class="stat reveal">
           <div class="stat-num">Brands + Creators</div>
           <div class="stat-label">Primary clients</div>
         </div>
-        <div class="stat">
+        <div class="stat reveal">
           <div class="stat-num">Shoot → Edit</div>
           <div class="stat-label">Full-service coverage</div>
         </div>
@@ -679,7 +759,7 @@
 <section class="wrap-section" id="contact">
   <div class="wrap">
     <div class="eyebrow">Get In Touch</div>
-    <h2 class="wrap-title">Have a shoot coming up? Let's talk through it.</h2>
+    <h2 class="wrap-title reveal">Have a shoot coming up? Let's talk through it.</h2>
     <div class="wrap-links">
       <a class="wrap-link" href="mailto:ryan@ryanlopezclark.com"><small>Email</small>ryan@ryanlopezclark.com</a>
     </div>
@@ -695,6 +775,42 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // Subtle hero parallax
+  var viewfinder = document.querySelector('.viewfinder');
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (viewfinder && !prefersReducedMotion) {
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if (!ticking) {
+        window.requestAnimationFrame(function(){
+          var y = window.scrollY;
+          if (y < 700) {
+            viewfinder.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+            viewfinder.style.opacity = String(Math.max(1 - y / 700, 0.35));
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 </script>
 
 </body>
