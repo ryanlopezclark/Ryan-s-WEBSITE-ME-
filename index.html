@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Lopez Clark — Camera Operator & Creative Director</title>
+<meta name="description" content="Ryan Lopez Clark — camera operator, creative director, and photographer based in LA & Houston. On-set production, live coverage, and content for brands and creators.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14171C;
+    --paper:#F2EFE9;
+    --amber:#E8A33D;
+    --teal:#4C6B65;
+    --rec:#C1443C;
+    --ink-soft:#3A3F47;
+    --hair:rgba(20,23,28,0.14);
+    --paper-hair:rgba(242,239,233,0.18);
+    --display:'Fraunces', serif;
+    --body:'Work Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  ::selection{background:var(--amber); color:var(--ink);}
+
+  :focus-visible{
+    outline:2px solid var(--rec);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(242,239,233,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 32px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .nav-mark{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.04em;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--rec);
+    animation:blink 2.4s ease-in-out infinite;
+  }
+  @keyframes blink{
+    0%,100%{opacity:1;}
+    50%{opacity:0.25;}
+  }
+  nav.links{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    font-weight:500;
+  }
+  nav.links a{
+    text-decoration:none;
+    position:relative;
+    padding-bottom:2px;
+  }
+  nav.links a::after{
+    content:'';
+    position:absolute;
+    left:0; right:0; bottom:-2px;
+    height:1px;
+    background:var(--ink);
+    transform:scaleX(0);
+    transform-origin:right;
+    transition:transform 0.3s ease;
+  }
+  nav.links a:hover::after{transform:scaleX(1); transform-origin:left;}
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:12px;
+    border:1px solid var(--ink);
+    padding:8px 14px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background 0.25s ease, color 0.25s ease;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--paper);}
+  @media (max-width:780px){
+    nav.links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 84px;
+    overflow:hidden;
+  }
+  .viewfinder{
+    position:relative;
+    border:1px solid var(--hair);
+    padding:56px 48px;
+  }
+  .viewfinder::before,
+  .viewfinder::after,
+  .corner-tl, .corner-br{
+    content:'';
+    position:absolute;
+    width:26px;
+    height:26px;
+    border:2px solid var(--rec);
+  }
+  .viewfinder::before{
+    top:-2px; left:-2px;
+    border-right:none; border-bottom:none;
+  }
+  .viewfinder::after{
+    bottom:-2px; right:-2px;
+    border-left:none; border-top:none;
+  }
+  .corner-tl{
+    top:-2px; right:-2px;
+    border-left:none; border-bottom:none;
+  }
+  .corner-br{
+    bottom:-2px; left:-2px;
+    border-right:none; border-top:none;
+  }
+  .rec-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--rec);
+    margin-bottom:28px;
+  }
+  .rec-line .tc{
+    color:var(--ink-soft);
+  }
+  h1.hero-title{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(2.4rem, 6vw, 5rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+  }
+  h1.hero-title em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--teal);
+  }
+  .hero-sub{
+    margin-top:28px;
+    max-width:520px;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+  .hero-meta{
+    margin-top:40px;
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .hero-meta span{display:block; color:var(--ink); font-family:var(--body); font-size:14px; margin-top:4px;}
+  .hero-actions{
+    margin-top:44px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    font-weight:500;
+    font-size:14px;
+    padding:14px 26px;
+    display:inline-block;
+    transition:background 0.25s ease;
+  }
+  .btn-primary:hover{background:var(--teal);}
+  .btn-ghost{
+    border:1px solid var(--ink);
+    text-decoration:none;
+    font-weight:500;
+    font-size:14px;
+    padding:14px 26px;
+    display:inline-block;
+    transition:background 0.25s ease, color 0.25s ease;
+  }
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  /* ---------- SECTION LABELS ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--rec);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;
+    height:1px;
+    background:var(--rec);
+  }
+  section{padding:100px 0;}
+  section + section{border-top:1px solid var(--hair);}
+  h2.section-title{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing:-0.01em;
+    max-width:640px;
+  }
+
+  /* ---------- SERVICES (SHOT LIST) ---------- */
+  .shotlist{
+    margin-top:56px;
+    border-top:1px solid var(--ink);
+  }
+  .shot{
+    display:grid;
+    grid-template-columns:90px 1fr 1fr;
+    gap:24px;
+    padding:32px 0;
+    border-bottom:1px solid var(--hair);
+    align-items:start;
+  }
+  .shot-num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-soft);
+    padding-top:4px;
+  }
+  .shot-name{
+    font-family:var(--display);
+    font-size:1.4rem;
+    font-weight:500;
+  }
+  .shot-desc{
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:440px;
+  }
+  @media (max-width:780px){
+    .shot{grid-template-columns:50px 1fr; row-gap:10px;}
+    .shot-desc{grid-column:2;}
+  }
+
+  /* ---------- WORK GRID ---------- */
+  .work-grid{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:2px;
+    background:var(--hair);
+    border:1px solid var(--hair);
+  }
+  .frame{
+    background:var(--ink);
+    aspect-ratio:4/5;
+    position:relative;
+    overflow:hidden;
+    color:var(--paper-hair);
+  }
+  .frame .tag{
+    position:absolute;
+    left:16px; bottom:16px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--paper);
+    letter-spacing:0.05em;
+  }
+  .frame .fnum{
+    position:absolute;
+    top:16px; right:16px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--paper-hair);
+  }
+  .frame::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, rgba(232,163,61,0.16), rgba(76,107,101,0.24));
+  }
+  @media (max-width:780px){
+    .work-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  .work-note{
+    margin-top:20px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- RATE CARD ---------- */
+  .callsheet{
+    margin-top:56px;
+    border:1px solid var(--ink);
+  }
+  .callsheet-head{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    font-family:var(--mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 24px;
+  }
+  .callsheet-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    padding:22px 24px;
+    border-bottom:1px solid var(--hair);
+    align-items:center;
+  }
+  .callsheet-row:last-child{border-bottom:none;}
+  .cs-package{
+    font-family:var(--display);
+    font-size:1.15rem;
+  }
+  .cs-detail{
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  .cs-rate{
+    font-family:var(--mono);
+    font-size:15px;
+    text-align:right;
+  }
+  @media (max-width:780px){
+    .callsheet-head{display:none;}
+    .callsheet-row{grid-template-columns:1fr; row-gap:6px; text-align:left;}
+    .cs-rate{text-align:left;}
+  }
+  .rate-note{
+    margin-top:24px;
+    font-size:14px;
+    color:var(--ink-soft);
+    max-width:560px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    margin-top:48px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:64px;
+  }
+  .about-body p{
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+    max-width:520px;
+  }
+  .about-body p:first-child{
+    font-size:19px;
+    color:var(--ink);
+    font-family:var(--display);
+  }
+  .stat-list{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .stat{
+    border-top:1px solid var(--hair);
+    padding-top:14px;
+  }
+  .stat-num{
+    font-family:var(--display);
+    font-size:2.1rem;
+  }
+  .stat-label{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+  }
+  @media (max-width:780px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- CONTACT / WRAP ---------- */
+  .wrap-section{
+    background:var(--ink);
+    color:var(--paper);
+    padding:110px 0;
+  }
+  .wrap-section .eyebrow{color:var(--amber);}
+  .wrap-section .eyebrow::before{background:var(--amber);}
+  h2.wrap-title{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    max-width:640px;
+    letter-spacing:-0.01em;
+  }
+  .wrap-links{
+    margin-top:48px;
+    display:flex;
+    gap:48px;
+    flex-wrap:wrap;
+  }
+  .wrap-link{
+    text-decoration:none;
+    border-bottom:1px solid var(--paper-hair);
+    padding-bottom:6px;
+    font-size:16px;
+    transition:border-color 0.25s ease;
+  }
+  .wrap-link:hover{border-color:var(--amber);}
+  .wrap-link small{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--paper-hair);
+    margin-bottom:6px;
+  }
+
+  footer{
+    padding:28px 0;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--paper-hair);
+    display:flex;
+    justify-content:space-between;
+    background:var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dot{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-mark"><span class="dot"></span> RYAN LOPEZ CLARK</div>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#rates">Rates</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Start a project</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="viewfinder">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="rec-line">● REC <span class="tc">LOS ANGELES / HOUSTON — AVAILABLE FOR BOOKING</span></div>
+      <h1 class="hero-title">Camera work<br>that keeps up<br>with your <em>brand.</em></h1>
+      <p class="hero-sub">I'm Ryan Lopez Clark — a camera operator, creative director, and photographer building fast, polished visual content for brands and creators. On-set, on-location, or live.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Book a shoot</a>
+        <a class="btn-ghost" href="#work">See the work</a>
+      </div>
+      <div class="hero-meta">
+        <div>Based in<span>LA &amp; Houston</span></div>
+        <div>Focus<span>Brands, creators, live events</span></div>
+        <div>Turnaround<span>Fast, no drama</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">Services</div>
+    <h2 class="section-title">Every shoot, handled front to back — camera, direction, and the finished edit.</h2>
+    <div class="shotlist">
+      <div class="shot">
+        <div class="shot-num">01</div>
+        <div class="shot-name">Camera Operation</div>
+        <div class="shot-desc">Multi-cam and single-op coverage for brand shoots, interviews, live events, and IRL content — steady, reactive, and easy to direct on the fly.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-num">02</div>
+        <div class="shot-name">Creative Direction</div>
+        <div class="shot-desc">Concepting, shot lists, and on-set direction that keep a production moving and make sure the final cut actually serves the brand.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-num">03</div>
+        <div class="shot-name">Photography</div>
+        <div class="shot-desc">Product, portrait, and event photography for brands and creators who need images that hold up across every platform.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-num">04</div>
+        <div class="shot-name">Social Content Production</div>
+        <div class="shot-desc">Short-form and platform-native content built to be clipped, posted, and repurposed — shot with the algorithm in mind, not just the frame.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">Selected Work</div>
+    <h2 class="section-title">A few frames from recent projects.</h2>
+    <div class="work-grid">
+      <div class="frame"><span class="fnum">01</span><span class="tag">Brand shoot</span></div>
+      <div class="frame"><span class="fnum">02</span><span class="tag">Live event</span></div>
+      <div class="frame"><span class="fnum">03</span><span class="tag">Creator content</span></div>
+      <div class="frame"><span class="fnum">04</span><span class="tag">Portrait series</span></div>
+      <div class="frame"><span class="fnum">05</span><span class="tag">Product photography</span></div>
+      <div class="frame"><span class="fnum">06</span><span class="tag">IRL stream</span></div>
+    </div>
+    <p class="work-note">— placeholder frames. Swap these for real stills or embedded reels from past shoots.</p>
+  </div>
+</section>
+
+<section id="rates">
+  <div class="wrap">
+    <div class="eyebrow">Rate Card</div>
+    <h2 class="section-title">Simple packages. Custom quotes for anything bigger.</h2>
+    <div class="callsheet">
+      <div class="callsheet-head">
+        <div>Package</div>
+        <div>What's included</div>
+        <div style="text-align:right;">Rate</div>
+      </div>
+      <div class="callsheet-row">
+        <div class="cs-package">Half Day</div>
+        <div class="cs-detail">Up to 4 hrs on-site, single camera operation</div>
+        <div class="cs-rate">Add your rate</div>
+      </div>
+      <div class="callsheet-row">
+        <div class="cs-package">Full Day</div>
+        <div class="cs-detail">Up to 8 hrs on-site, camera + creative direction</div>
+        <div class="cs-rate">Add your rate</div>
+      </div>
+      <div class="callsheet-row">
+        <div class="cs-package">Photography Session</div>
+        <div class="cs-detail">Product, portrait, or event stills, edited gallery delivered</div>
+        <div class="cs-rate">Add your rate</div>
+      </div>
+      <div class="callsheet-row">
+        <div class="cs-package">Content Package</div>
+        <div class="cs-detail">Multi-day or retainer-based social content production</div>
+        <div class="cs-rate">Custom quote</div>
+      </div>
+    </div>
+    <p class="rate-note">Rates vary by scope, location, and turnaround. Reach out with your project details for an exact quote.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2 class="section-title">Behind the camera and ahead of the shot list.</h2>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>I split my time between LA and Houston, working with brands and creators who need someone who can run a camera, direct a scene, and think about the edit before it's even shot.</p>
+        <p>Most of my work sits at the intersection of production and platform — I understand what a piece of content needs to do once it's live, not just how it should look on set.</p>
+        <p>Whether it's a single half-day shoot or an ongoing content partnership, I keep things efficient, communicative, and easy to work with.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat">
+          <div class="stat-num">LA / HOU</div>
+          <div class="stat-label">Based &amp; available</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Brands + Creators</div>
+          <div class="stat-label">Primary clients</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">Shoot → Edit</div>
+          <div class="stat-label">Full-service coverage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-section" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Get In Touch</div>
+    <h2 class="wrap-title">Have a shoot coming up? Let's talk through it.</h2>
+    <div class="wrap-links">
+      <a class="wrap-link" href="mailto:ryan@ryanlopezclark.com"><small>Email</small>ryan@ryanlopezclark.com</a>
+      <a class="wrap-link" href="https://ryanlopezclark.com"><small>Site</small>ryanlopezclark.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© <span id="year"></span> Ryan Lopez Clark</span>
+    <span>Camera Operator · Creative Director · Photographer</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
